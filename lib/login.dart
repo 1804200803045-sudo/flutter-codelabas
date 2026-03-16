@@ -23,6 +23,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // TODO: Add text editing controllers (101)
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,33 +37,44 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 Image.asset('assets/diamond.png'),
                 const SizedBox(height: 16.0),
-                const Text('SHRINE'),
+                Text('SHRINE',
+                 style: Theme.of(context).textTheme.headlineSmall,
+                 ),
               ],
             ),
             const SizedBox(height: 120.0),
             // TODO: Remove filled: true values (103)
-            // TODO: Add TextField widgets (101)
             TextField(
- decoration: const InputDecoration(
-    filled: true,
+  controller: _usernameController,
+  decoration: const InputDecoration(
+    // Removed filled: true
     labelText: 'Username',
   ),
 ),
-
 const SizedBox(height: 12.0),
-
 TextField(
+  controller: _passwordController,
   decoration: const InputDecoration(
-    filled: true,
+    // Removed filled: true
     labelText: 'Password',
   ),
   obscureText: true,
 ),
+            // TODO: Add TextField widgets (101)
+           
             // TODO: Add button bar (101)
-      
             TextButton(
   child: const Text('CANCEL'),
-  onPressed: () {},
+  onPressed: () {
+    _usernameController.clear();
+    _passwordController.clear();
+  },
+  style: TextButton.styleFrom(
+    foregroundColor: Theme.of(context).colorScheme.secondary,
+    shape: const BeveledRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+    ),
+  ),
 ),
 
 ElevatedButton(
@@ -69,6 +82,12 @@ ElevatedButton(
   onPressed: () {
     Navigator.pop(context);
   },
+   style: ElevatedButton.styleFrom(
+    elevation: 8.0,
+    shape: const BeveledRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+    ),
+  ),
 ),
           ],
         ),
